@@ -49,7 +49,7 @@ private:
     QString host;
     quint16 port;
     bool encryptedConnect;
-    bool startTls;
+    bool Tls;
     bool auth;
     QString user;
     QString pass;
@@ -69,7 +69,7 @@ private:
 class SMTPFactory: public MSAFactory
 {
 public:
-    SMTPFactory(const QString &host, quint16 port, bool encryptedConnect, bool startTls, bool auth,
+    SMTPFactory(const QString &host, quint16 port, bool encryptedConnect, bool Tls, bool auth,
          const QString &user);
     virtual ~SMTPFactory();
     virtual AbstractMSA *create(QObject *parent) const;
@@ -77,7 +77,7 @@ private:
     QString m_host;
     quint16 m_port;
     bool m_encryptedConnect;
-    bool m_startTls;
+    bool m_Tls;
     bool m_auth;
     QString m_user;
 };
