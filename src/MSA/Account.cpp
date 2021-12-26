@@ -232,7 +232,7 @@ void Account::maybeShowPortWarning()
         case Method::SMTP:
             portWarn = tr("This port is nonstandard. The default port for cleartext SMTP is %1.").arg(defPort);
             break;
-        case Method::SMTP_STARTTLS:
+        case Method::SMTP_TLS:
             portWarn = tr("This port is nonstandard. The default port for SMTP submission secured via TLS is %1.").arg(defPort);
             break;
         case Method::SSMTP:
@@ -252,7 +252,7 @@ void Account::saveSettings()
 {
     switch (m_msaSubmissionMethod) {
     case Method::SMTP:
-    case Method::SMTP_STARTTLS:
+    case Method::SMTP_TLS:
         m_settings->setValue(Common::SettingsNames::msaMethodKey, Common::SettingsNames::methodSMTP);
         m_settings->setValue(Common::SettingsNames::smtpTlsKey,
                              m_msaSubmissionMethod == Method::SMTP_TLS); // unconditionally
