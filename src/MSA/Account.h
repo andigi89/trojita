@@ -51,7 +51,7 @@ public:
     enum class Method {
         SMTP, /**< Non-encrypted connection over network */
         SSMTP, /**< Encrypted network connection from the start */
-        SMTP_STARTTLS, /**< Starts with a non-encrypted network connection. Which gets upgraded using STARTTLS */
+        SMTP_TLS, /**< Starts with a non-encrypted network connection. Which gets upgraded using TLS */
         SENDMAIL, /**< Use a local Sendmail compatible transfer agent */
         IMAP_SENDMAIL, /**< Uses the IMAP SENDMAIL Extension */
     };
