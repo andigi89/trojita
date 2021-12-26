@@ -116,8 +116,8 @@ void SMTP::sendContinueGotPassword()
         qwwSmtp->connectToHostEncrypted(host, port);
     else
         qwwSmtp->connectToHost(host, port);
-    if (startTls)
-        qwwSmtp->startTls();
+    if (Tls)
+        qwwSmtp->Tls();
     if (auth)
         qwwSmtp->authenticate(user, pass, QwwSmtpClient::AuthAny);
     emit sending(); // FIXME: later
