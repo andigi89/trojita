@@ -169,7 +169,7 @@ quint16 Account::defaultPort(const Method method)
 {
     switch (method) {
     case Method::SMTP:
-    case Method::SMTP_STARTTLS:
+    case Method::SMTP_TLS:
         return Common::PORT_SMTP_SUBMISSION;
         break;
     case Method::SSMTP:
@@ -196,7 +196,7 @@ void Account::setSubmissionMethod(const Method method)
     switch (method) {
     case Method::SMTP:
     case Method::SSMTP:
-    case Method::SMTP_STARTTLS:
+    case Method::SMTP_TLS:
         m_msaSubmissionMethod = method;
         setPort(defaultPort(m_msaSubmissionMethod));
         break;
@@ -217,7 +217,7 @@ void Account::maybeShowPortWarning()
         // this isn't a direct network connection -> ignore this
         return;
     case Method::SMTP:
-    case Method::SMTP_STARTTLS:
+    case Method::SMTP_TLS:
     case Method::SSMTP:
         // we're connecting through the network -> let's check the port
         break;
@@ -233,7 +233,7 @@ void Account::maybeShowPortWarning()
             portWarn = tr("This port is nonstandard. The default port for cleartext SMTP is %1.").arg(defPort);
             break;
         case Method::SMTP_STARTTLS:
-            portWarn = tr("This port is nonstandard. The default port for SMTP submission secured via STARTTLS is %1.").arg(defPort);
+            portWarn = tr("This port is nonstandard. The default port for SMTP submission secured via TLS is %1.").arg(defPort);
             break;
         case Method::SSMTP:
             portWarn = tr("This port is nonstandard. The default port for SMTP over encrypted SSL/TLS connection is %1.").arg(defPort);
@@ -254,8 +254,8 @@ void Account::saveSettings()
     case Method::SMTP:
     case Method::SMTP_STARTTLS:
         m_settings->setValue(Common::SettingsNames::msaMethodKey, Common::SettingsNames::methodSMTP);
-        m_settings->setValue(Common::SettingsNames::smtpStartTlsKey,
-                             m_msaSubmissionMethod == Method::SMTP_STARTTLS); // unconditionally
+        m_settings->setValue(Common::SettingsNames::smtpTlsKey,
+                             m_msaSubmissionMethod == Method::SMTP_TLS); // unconditionally
         m_settings->setValue(Common::SettingsNames::smtpAuthKey, m_authenticateEnabled);
         m_settings->setValue(Common::SettingsNames::smtpAuthReuseImapCredsKey, m_reuseImapAuth);
         m_settings->setValue(Common::SettingsNames::smtpUserKey, m_username);
@@ -303,7 +303,7 @@ void Account::restoreSettings()
                                            Common::SettingsNames::methodSMTP).toString();
     if (connMethod == Common::SettingsNames::methodSMTP) {
         m_msaSubmissionMethod = m_settings->value(Common::SettingsNames::smtpStartTlsKey).toBool() ?
-                            Method::SMTP_STARTTLS : Method::SMTP;
+                            Method::SMTP_TLS : Method::SMTP;
     } else if (connMethod == Common::SettingsNames::methodSSMTP) {
         m_msaSubmissionMethod = Method::SSMTP;
     } else if (connMethod == Common::SettingsNames::methodSENDMAIL) {
@@ -318,7 +318,7 @@ void Account::restoreSettings()
     if (!m_port) {
         switch (m_msaSubmissionMethod) {
         case Method::SMTP:
-        case Method::SMTP_STARTTLS:
+        case Method::SMTP_TLS:
         case Method::SSMTP:
             m_port = defaultPort(m_msaSubmissionMethod);
             break;
