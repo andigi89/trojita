@@ -46,9 +46,9 @@ QString connectionStateToString(const ConnectionState state)
     case CONN_STATE_STARTTLS_ISSUED:
         return QObject::tr("Asking for encryption...");
     case CONN_STATE_STARTTLS_HANDSHAKE:
-        return QObject::tr("Starting encryption (STARTTLS)...");
+        return QObject::tr("Starting encryption (TLS)...");
     case CONN_STATE_STARTTLS_VERIFYING:
-        return QObject::tr("Checking certificates (STARTTLS)...");
+        return QObject::tr("Checking certificates (TLS)...");
     case CONN_STATE_ESTABLISHED_PRECAPS:
         return QObject::tr("Checking capabilities (after STARTTLS)...");
     case CONN_STATE_LOGIN:
