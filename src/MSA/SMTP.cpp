@@ -26,10 +26,10 @@
 namespace MSA
 {
 
-SMTP::SMTP(QObject *parent, const QString &host, quint16 port, bool encryptedConnect, bool startTls, bool auth,
+SMTP::SMTP(QObject *parent, const QString &host, quint16 port, bool encryptedConnect, bool Tls, bool auth,
            const QString &user):
     AbstractMSA(parent), host(host), port(port),
-    encryptedConnect(encryptedConnect), startTls(startTls), auth(auth),
+    encryptedConnect(encryptedConnect), Tls(Tls), auth(auth),
     user(user), failed(false), isWaitingForPassword(false), sendingMode(MODE_SMTP_INVALID)
 {
     qwwSmtp = new QwwSmtpClient(this);
@@ -164,9 +164,9 @@ void SMTP::sendBurl(const QByteArray &from, const QList<QByteArray> &to, const Q
     emit passwordRequested(user, host);
 }
 
-SMTPFactory::SMTPFactory(const QString &host, quint16 port, bool encryptedConnect, bool startTls,
+SMTPFactory::SMTPFactory(const QString &host, quint16 port, bool encryptedConnect, bool Tls,
                          bool auth, const QString &user):
-    m_host(host), m_port(port), m_encryptedConnect(encryptedConnect), m_startTls(startTls),
+    m_host(host), m_port(port), m_encryptedConnect(encryptedConnect), m_Tls(Tls),
     m_auth(auth), m_user(user)
 {
 }
@@ -177,7 +177,7 @@ SMTPFactory::~SMTPFactory()
 
 AbstractMSA *SMTPFactory::create(QObject *parent) const
 {
-    return new SMTP(parent, m_host, m_port, m_encryptedConnect, m_startTls, m_auth, m_user);
+    return new SMTP(parent, m_host, m_port, m_encryptedConnect, m_Tls, m_auth, m_user);
 }
 
 }
