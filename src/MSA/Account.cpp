@@ -254,7 +254,7 @@ void Account::saveSettings()
     case Method::SMTP:
     case Method::SMTP_TLS:
         m_settings->setValue(Common::SettingsNames::msaMethodKey, Common::SettingsNames::methodSMTP);
-        m_settings->setValue(Common::SettingsNames::smtpTlsKey,
+        m_settings->setValue(Common::SettingsNames::smtpTLSKey,
                              m_msaSubmissionMethod == Method::SMTP_TLS); // unconditionally
         m_settings->setValue(Common::SettingsNames::smtpAuthKey, m_authenticateEnabled);
         m_settings->setValue(Common::SettingsNames::smtpAuthReuseImapCredsKey, m_reuseImapAuth);
